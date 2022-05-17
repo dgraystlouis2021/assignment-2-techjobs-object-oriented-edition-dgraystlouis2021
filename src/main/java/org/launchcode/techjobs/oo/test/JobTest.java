@@ -5,8 +5,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.launchcode.techjobs.oo.*;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by LaunchCode
@@ -40,7 +44,45 @@ public class JobTest {
     }
     @Test
     public void testJobToString() {
-        Job jobA=new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        Job jobA = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         assertTrue(jobA.toString().startsWith("\n"));
+        assertTrue(jobA.toString().endsWith("\n"));
+
+        String temp = jobA.toString();
+        // STORE toString() RESULT IN s ARRAY
+        String[] s;
+        s = temp.split("\n");
+        assertEquals(s.length, 7);
+
+        HashMap<String, Object> stringList = new HashMap<>();
+        Object x = (Integer) (jobA.getId());
+        stringList.put("ID:", x);
+        x = (Object) (jobA.getName());
+        stringList.put("Name:", x);
+        x = (Object) (jobA.getEmployer());
+        stringList.put("Employer:", x);
+        x = (Object) (jobA.getLocation());
+        stringList.put("Location:", x);
+        x = (Object) (jobA.getPositionType());
+        stringList.put("Position Type:", x);
+        x = (Object) (jobA.getCoreCompetency());
+        stringList.put("Core Competency:", x);
+        Set<Map.Entry<String, Object>> entrySet = stringList.entrySet();
+        for (int i = 0; i < s.length; i++) {
+            String stringTemp = s[i];
+            //String s=stringTemp.split(" ",1);
+            String[] stringArray = stringTemp.split(" ",1);
+            for (Map.Entry<String, Object> entry : entrySet) {
+                if (entry.getKey().equals(stringArray[0])) {
+                    if ((stringArray[1].trim()).equals("Data not available")) {
+                        assertEquals(entry.getValue(), null);
+                        break;
+                    }else{
+                        assertEquals(stringArray[1].trim(),entry.getValue().toString());
+                    }
+                }
+            }
+        }
     }
+
 }
