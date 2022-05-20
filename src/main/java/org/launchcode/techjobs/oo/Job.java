@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.oo;
 
+import java.lang.reflect.Field;
 import java.util.Objects;
 
 public class Job {
@@ -26,6 +27,20 @@ public class Job {
         this();
         this.name = name;
         this.employer = employer;
+        this.location = location;
+        this.positionType = positionType;
+        this.coreCompetency = coreCompetency;
+    }
+    public Job(Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
+        this();
+        this.employer = employer;
+        this.location = location;
+        this.positionType = positionType;
+        this.coreCompetency = coreCompetency;
+    }
+    public Job(String name, Location location, PositionType positionType, CoreCompetency coreCompetency) {
+        this();
+        this.name = name;
         this.location = location;
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
@@ -96,17 +111,25 @@ public class Job {
 
     @Override
     public String toString() {
-        /*
-        return "Job{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", employer=" + employer +
-                ", location=" + location +
-                ", positionType=" + positionType +
-                ", coreCompetency=" + coreCompetency +
-                '}';
-                */
-
+        String msg="Data not available";
+        String s="";
+        s+="\nID: "+id+"\n";
+        name=name.equals("")?msg:name;
+        s+="Name: "+name+"\n";
+        employer=employer.getValue().equals("")?new Employer(msg):employer;
+        s+="Employer: "+employer+"\n";
+        location=location.getValue().equals("")?new Location(msg):location;
+        s+="Location: "+location+"\n";
+        positionType=positionType.getValue().equals("")?new PositionType(msg):positionType;
+        s+="Position Type: "+positionType+"\n";
+        coreCompetency=coreCompetency.getValue().equals("")?new CoreCompetency(msg):coreCompetency;
+        s+="Core Competency: "+coreCompetency+"\n";
+        return s;
+    }
+/*
+    @Override
+    public String toString() {
+        String msg="Data not available";
         String s="";
         s+="\nID: "+id+"\n";
         s+="Name: "+name+"\n";
@@ -115,5 +138,27 @@ public class Job {
         s+="Position Type: "+positionType+"\n";
         s+="Core Competency: "+coreCompetency+"\n";
         return s;
+    }
+*/
+    public boolean checkIfStringNull(String s){
+        if(s.equals(null)){
+            return true;
+        }
+        return false;
+    }
+
+    public <T> boolean checkIfObjectValueNull(T obj){
+        Object o;
+        o=obj;
+        try {
+            Field f=obj.getClass().getDeclaredField("value");
+            String s=f.toString();
+            if (obj.getClass().getDeclaredField("value").equals("")) {
+                return true;
+            }
+        }catch(NoSuchFieldException ex){
+
+        }
+        return false;
     }
 }

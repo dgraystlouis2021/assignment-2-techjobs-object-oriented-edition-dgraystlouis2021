@@ -2,7 +2,7 @@ package org.launchcode.techjobs.oo;
 
 import java.util.Objects;
 
-public class CoreCompetency extends Job{
+public class CoreCompetency {
 
     private int id;
     private static int nextId = 1;
