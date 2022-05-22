@@ -140,38 +140,43 @@ public class JobTest {
     }
     @Test
     public void testToStringHandlesEmptyField(){
-        Job jobA = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        //Job jobA = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        Job jobA = new Job("Product tester", new Employer(""), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
         String temp = jobA.toString();
         // STORE toString() RESULT IN s ARRAY
         String[] s;
         s = temp.split("\n");
-        assertEquals(s.length, 7);
+        assertEquals(7,s.length);
 
         HashMap<String, Object> stringList = new HashMap<>();
         Object x = (Integer) (jobA.getId());
-        stringList.put("ID:", x);
+        stringList.put("ID", x);
         x = (Object) (jobA.getName());
-        stringList.put("Name:", x);
+        stringList.put("Name", x);
         x = (Object) (jobA.getEmployer());
-        stringList.put("Employer:", x);
+        stringList.put("Employer", x);
         x = (Object) (jobA.getLocation());
-        stringList.put("Location:", x);
+        stringList.put("Location", x);
         x = (Object) (jobA.getPositionType());
-        stringList.put("Position Type:", x);
+        stringList.put("Position Type", x);
         x = (Object) (jobA.getCoreCompetency());
-        stringList.put("Core Competency:", x);
+        stringList.put("Core Competency", x);
         Set<Map.Entry<String, Object>> entrySet = stringList.entrySet();
         for (int i = 0; i < s.length; i++) {
             String stringTemp = s[i];
             //String s=stringTemp.split(" ",1);
-            String[] stringArray = stringTemp.split(" ",1);
+            // split on 1st instance
+            String[] stringArray = stringTemp.split(": ",2);
             for (Map.Entry<String, Object> entry : entrySet) {
                 if (entry.getKey().equals(stringArray[0])) {
                     if ((stringArray[1].trim()).equals("Data not available")) {
-                        assertEquals(entry.getValue(), null);
+                        // compares model data to toString output data
+                        assertEquals(entry.getValue().toString(),stringArray[1].trim());
                         break;
                     }else{
-                        assertEquals(stringArray[1].trim(),entry.getValue().toString());
+                        // compares model data to toString output data
+                        assertEquals(entry.getValue().toString(),stringArray[1].trim());
                     }
                 }
             }
