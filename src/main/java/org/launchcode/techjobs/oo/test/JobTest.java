@@ -96,7 +96,9 @@ public class JobTest {
     }
     @Test
     public void testToStringContainsCorrectLabelsAndData(){
-        Job jobA = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        //Job jobA = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        Job jobA = new Job("Product tester", new Employer(""), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
         String temp = jobA.toString();
         // STORE toString() RESULT IN s ARRAY
         String[] s;
@@ -105,28 +107,28 @@ public class JobTest {
 
         HashMap<String, Object> stringList = new HashMap<>();
         Object x = (Integer) (jobA.getId());
-        stringList.put("ID:", x);
+        stringList.put("ID", x);
         x = (Object) (jobA.getName());
-        stringList.put("Name:", x);
+        stringList.put("Name", x);
         x = (Object) (jobA.getEmployer());
-        stringList.put("Employer:", x);
+        stringList.put("Employer", x);
         x = (Object) (jobA.getLocation());
-        stringList.put("Location:", x);
+        stringList.put("Location", x);
         x = (Object) (jobA.getPositionType());
-        stringList.put("Position Type:", x);
+        stringList.put("Position Type", x);
         x = (Object) (jobA.getCoreCompetency());
-        stringList.put("Core Competency:", x);
+        stringList.put("Core Competency", x);
         Set<Map.Entry<String, Object>> entrySet = stringList.entrySet();
         for (int i = 0; i < s.length; i++) {
             String stringTemp = s[i];
             //String s=stringTemp.split(" ",1);
-            String[] stringArray = stringTemp.split(" ",1);
+            // split on 1st instance
+            String[] stringArray = stringTemp.split(": ",2);
             for (Map.Entry<String, Object> entry : entrySet) {
                 if (entry.getKey().equals(stringArray[0])) {
                     if ((stringArray[1].trim()).equals("Data not available")) {
                         // compares model data to toString output data
-                        String empty=null;
-                        assertEquals(null,entry.getValue());
+                        assertEquals(entry.getValue().toString(),stringArray[1].trim());
                         break;
                     }else{
                         // compares model data to toString output data
