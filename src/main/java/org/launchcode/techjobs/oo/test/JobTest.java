@@ -50,12 +50,12 @@ public class JobTest {
         //String s=jobA.toString();
         //assertTrue(s.charAt(0)=='\n');
         //assertTrue(s.charAt(s.length()-1)=='\n');
-        int lastIndex = (jobA.toString().length() - 1);
+        int index = (jobA.toString().length() - 1);
 
         //assertTrue(jobA.toString().charAt(0) == '\n');
         //assertTrue(jobA.toString().charAt(lastIndex) == '\n');
         assertEquals('\n',jobA.toString().charAt(0));
-        assertEquals('\n',jobA.toString().charAt(lastIndex));
+        assertEquals('\n',jobA.toString().charAt(index));
 /*
         String temp = jobA.toString();
         // STORE toString() RESULT IN s ARRAY
@@ -101,7 +101,7 @@ public class JobTest {
         // STORE toString() RESULT IN s ARRAY
         String[] s;
         s = temp.split("\n");
-        assertEquals(s.length, 7);
+        assertEquals(7,s.length);
 
         HashMap<String, Object> stringList = new HashMap<>();
         Object x = (Integer) (jobA.getId());
@@ -124,10 +124,13 @@ public class JobTest {
             for (Map.Entry<String, Object> entry : entrySet) {
                 if (entry.getKey().equals(stringArray[0])) {
                     if ((stringArray[1].trim()).equals("Data not available")) {
-                        assertEquals(entry.getValue(), null);
+                        // compares model data to toString output data
+                        String empty=null;
+                        assertEquals(null,entry.getValue());
                         break;
                     }else{
-                        assertEquals(stringArray[1].trim(),entry.getValue().toString());
+                        // compares model data to toString output data
+                        assertEquals(entry.getValue().toString(),stringArray[1].trim());
                     }
                 }
             }
