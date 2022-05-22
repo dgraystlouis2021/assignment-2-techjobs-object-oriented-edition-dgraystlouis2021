@@ -26,15 +26,36 @@ public class JobTest {
         assertFalse(jobA.getId()==jobB.getId());
         assertTrue(jobB.getId()==jobA.getId()+1);
     }
+
+
+
+
+    //------------------------------
+
+    // Use assertTrue and assertEquals statements to test that the constructor correctly assigns both the class and value of
+    // each field. Your test should have 5 assert statements of each type
     @Test
     public void testJobConstructorSetsAllFields() {
         Job jobA=new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         assertTrue(jobA instanceof Job);
+        String s=jobA.getName().getClass().getSimpleName();
+        assertTrue(jobA.getName().getClass().getSimpleName().equals("String"));
+        assertTrue(jobA.getEmployer().getClass().getSimpleName().equals("Employer"));
+        assertTrue(jobA.getLocation().getClass().getSimpleName().equals("Location"));
+        assertTrue(jobA.getPositionType().getClass().getSimpleName().equals("PositionType"));
+        assertTrue(jobA.getCoreCompetency().getClass().getSimpleName().equals("CoreCompetency"));
+
         assertTrue((jobA.getName()).equals("Product tester"));
         assertTrue((jobA.getEmployer().getValue()).equals("ACME"));
         assertTrue((jobA.getLocation().getValue()).equals("Desert"));
         assertTrue((jobA.getPositionType().getValue()).equals("Quality control"));
         assertTrue((jobA.getCoreCompetency().getValue()).equals("Persistence"));
+
+        assertEquals("Product tester",jobA.getName());
+        assertEquals("ACME",jobA.getEmployer().getValue());
+        assertEquals("Desert",jobA.getLocation().getValue());
+        assertEquals("Quality control",jobA.getPositionType().getValue());
+        assertEquals("Persistence",jobA.getCoreCompetency().getValue());
     }
     @Test
     public void testJobsForEquality() {
