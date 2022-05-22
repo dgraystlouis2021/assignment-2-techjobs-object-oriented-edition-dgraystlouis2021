@@ -52,8 +52,10 @@ public class JobTest {
         //assertTrue(s.charAt(s.length()-1)=='\n');
         int lastIndex = (jobA.toString().length() - 1);
 
-        assertTrue(jobA.toString().charAt(0) == '\n');
-        assertTrue(jobA.toString().charAt(lastIndex) == '\n');
+        //assertTrue(jobA.toString().charAt(0) == '\n');
+        //assertTrue(jobA.toString().charAt(lastIndex) == '\n');
+        assertEquals('\n',jobA.toString().charAt(0));
+        assertEquals('\n',jobA.toString().charAt(lastIndex));
 /*
         String temp = jobA.toString();
         // STORE toString() RESULT IN s ARRAY
