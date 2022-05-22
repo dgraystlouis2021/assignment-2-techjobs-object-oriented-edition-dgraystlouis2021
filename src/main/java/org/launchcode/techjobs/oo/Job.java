@@ -112,8 +112,8 @@ public class Job {
     @Override
     public String toString() {
         String msg="Data not available";
-        String s="";
-        s+="\nID: "+id+"\n";
+        String s;
+        s="\nID: "+id+"\n";
         name=name.equals("")?msg:name;
         s+="Name: "+name+"\n";
         employer=employer.getValue().equals("")?new Employer(msg):employer;

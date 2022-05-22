@@ -47,9 +47,13 @@ public class JobTest {
         Job jobA = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         //assertTrue(jobA.toString().startsWith("\n"));
         //assertTrue(jobA.toString().endsWith("\n"));
-        String s=jobA.toString();
-        assertTrue(s.charAt(0)=='\n');
-        assertTrue(s.charAt(s.length()-1)=='\n');
+        //String s=jobA.toString();
+        //assertTrue(s.charAt(0)=='\n');
+        //assertTrue(s.charAt(s.length()-1)=='\n');
+        int lastIndex = (jobA.toString().length() - 1);
+
+        assertTrue(jobA.toString().charAt(0) == '\n');
+        assertTrue(jobA.toString().charAt(lastIndex) == '\n');
 /*
         String temp = jobA.toString();
         // STORE toString() RESULT IN s ARRAY
